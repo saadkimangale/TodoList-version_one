@@ -1,8 +1,13 @@
 const task = document.getElementById("task");
+const popup = document.getElementById("popup");
+const modapToPopup= document.getElementById("modapToPopup");
+const confirmDelete = document.getElementById("confirmDelete");
+const cancelDelete = document.getElementById("cancelDelete");
 
 const btn =  document.getElementById("submit");
 const task_List =  document.getElementById("result");
 
+let taskToDelete = "";
   
       task.addEventListener('keypress', (e)=>{
         if(e.key === "Enter"){
@@ -49,28 +54,90 @@ const task_List =  document.getElementById("result");
         // Add delete functionality
 
        deleteBtn.addEventListener("click", () => {
-    // Ask for confirmation
-    const isConfirmed = confirm("Are you sure you want to delete this task?");
-    
-    // Only delete if user confirms
-    if (isConfirmed) {
-        task_Row.remove();
-    }
-});
 
+     taskToDelete = task_Row;
+
+     popup.classList.remove("hidden");
+     modapToPopup.classList.remove("hidden");
+
+
+      document.body.style.overflow = "hidden";
+  
+});
+          //  addTickfuntionality
          tickBtn.addEventListener("click", ()=>{
           task_Text.classList.toggle("tick");
             
         })
+              
 
+        // AddEditBtnFunctionality
 
         editBtn.addEventListener("click", ()=>{
-         const newText= prompt("Edit Task:", task_Text.textContent)
 
-         if(newText !== null && newText.trim()!==""){
-            task_Text.textContent = newText;
-         }
-            
+        const edit_Text =  task_Text.textContent;  
+
+        const input_btns =  document.createElement("div");
+        input_btns.className = "input-Btns";
+         
+        // CreateInputType
+        const input_Value = document.createElement("input");
+        input_Value.type = "text"
+        input_Value.className = "input-value";
+        input_Value.value = edit_Text;
+
+
+       const save_Btn =  document.createElement("button");
+       save_Btn.textContent = "Save";
+       save_Btn.className = "save-btn";
+
+       const cancel_Btn =  document.createElement("button");
+       cancel_Btn.textContent = "Cancel";
+       cancel_Btn.className = "cancel-btn";
+
+       input_btns.appendChild(input_Value)
+       input_btns.appendChild(save_Btn)
+       input_btns.appendChild(cancel_Btn)
+
+           
+      text_Only.replaceWith(input_btns);
+      // task_Row.replaceChild(input_btns, task_Button);
+      input_Value.focus();
+
+      task_Button.classList.add("disabled");
+
+
+
+      save_Btn.onclick = ()=>{
+
+        const updated_Task =  input_Value.value.trim ();
+
+        if(updated_Task !== "") {
+          task_Text.textContent = updated_Task;
+        }
+
+        input_btns.replaceWith(text_Only);
+        task_Button.classList.remove("disabled");
+        
+      }
+
+      cancel_Btn.onclick = () => {
+
+        input_btns.replaceWith(text_Only);
+        task_Button.classList.remove("disabled");
+      }
+ 
+       input_Value.addEventListener("keydown", (e)=>{
+        if(e.key == "Enter"){
+          save_Btn.click()
+        }
+
+        if(e.key == "Escape"){
+          cancel_Btn.click()
+        }
+       })
+
+    
         })
 
           
@@ -88,16 +155,53 @@ const task_List =  document.getElementById("result");
 
     // Add row to list
     task_List.appendChild(task_Row);
+    
+
+
+      Toastify({
+        text: "Task Added",
+        className: "info",
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+        }
+      }).showToast();
 
     // clear input
     task.value = "";
+
+    btn.textContent = "Add Task";
 
 
 
 
       })
+      
+
+      
 
 
+confirmDelete.onclick = () => {
+  if (taskToDelete) {
+    taskToDelete.remove();
+    taskToDelete = null;
+  }
+
+  closeModel ();
+}
+
+cancelDelete.onclick = () => {
+  closeModel ();
+}
+
     
-    
- 
+   function closeModel (){
+    popup.classList.add("hidden");
+    modapToPopup.classList.add("hidden");
+
+   } 
+
+
+   
+      
+
+

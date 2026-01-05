@@ -100,6 +100,11 @@ body {
     gap: 15px;
 }
 
+
+.taskButton.disabled {
+ display: none;
+}
+
 /* .textOnly {
     flex: 1;
     min-width: 0
@@ -127,21 +132,23 @@ button {
 
 
 .edit-btn {
-    background-color: #f39c12;
-    color: white;
+     background-color: #f0f0f0;
+     color: #333;
+     padding: 6px 12px;
 }
 
-.edit-btn:hover {
+/* .edit-btn:hover {
     background-color: #e67e22;
-}
+} */
 
 .delete-btn {
-    background-color: #e74c3c;
-    color: white;
+    background: transparent;
+    color: #999;
+    padding: 6px 12px;
 }
 
 .delete-btn:hover {
-    background-color: #c0392b;
+    color: #e74c3c;
 }  
 
 .tick-btn {
@@ -149,9 +156,9 @@ button {
     color: white;
 }
 
-.tick-btn:hover {
+/* .tick-btn:hover {
     background-color: #27ae60;
-}
+} */
 
 #result div {
     display: flex;
@@ -187,4 +194,92 @@ footer {
     text-align: center;
     padding: 20px;
     background: #f5f5f5;
+}
+
+
+#popup{
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+#modapToPopup {
+    position: fixed;
+    top: 50%;
+    left:30%;
+    background-color: white;
+    padding: 20px;
+    width: 300px;
+    z-index: 1000;
+    text-align: center;
+    border-radius: 8px;
+
+}
+
+#confirmDelete{
+
+    background-color: red;
+    padding:3px 10px;
+    margin-top:20px;
+    color:white;
+    width: 100px;
+    border-radius: 4px;
+    text-align: center;
+
+}
+
+#cancelDelete{
+
+    background-color: green;
+    padding:3px 10px;
+    margin-top:20px;
+    color:white;
+    width: 100px;
+    border-radius: 4px;
+
+}
+
+
+.hidden {
+  display: none;
+}
+
+
+.input-Btns{
+    width: 100%;
+    /* border: 1px solid #3498db; */
+    border-radius: 8px;
+    padding: 10px 5px;
+    display: flex;   
+
+}
+
+
+.input-value {
+    border: 1px solid #3498db;
+    border-radius: 8px;
+    width: 500px;
+    padding: 12px 10px;
+    outline: none;
+}
+
+.save-btn{
+   
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-btn{
+   
+  background-color: #e0e0e0;
+  color: #333;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
 }
